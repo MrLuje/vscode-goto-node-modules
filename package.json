@@ -9,6 +9,8 @@
   "engines": {
     "vscode": "^1.23.0"
   },
+  "icon": "images/icon.png",
+  "repository": "https://github.com/MrLuje/vscode-goto-node-modules",
   "categories": ["Other"],
   "activationEvents": ["onLanguage:json"],
   "main": "./out/extension",
