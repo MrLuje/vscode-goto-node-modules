@@ -60,7 +60,7 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "pretest": "npx copy-dir-cli ./src/test/workspace ./out/test",
+    "pretest": "npx copy-dir-cli ./src/test/workspace ./out/test/workspace",
     "test": "npm run compile && node ./node_modules/vscode/bin/test",
     "publish-market": "vsce package --yarn -o ./build/vscode-goto-node-modules.vsix && vsce publish --packagePath ./build/vscode-goto-node-modules.vsix"
   },
@@ -70,5 +70,6 @@
     "tslint": "^5.8.0",
     "typescript": "^2.6.1",
     "vscode": "^1.1.6"
-  }
+  },
+  "dependencies": {}
 }

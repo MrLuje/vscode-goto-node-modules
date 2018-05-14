@@ -13,10 +13,13 @@ before_install:
   - if [ $TRAVIS_OS_NAME == "osx" ]; then
       brew install yarn --without-node;
     fi
+  - npm i -g npm@5.10.0
 
 install:
   - yarn
   - yarn vscode:prepublish
+  - npx copy-dir-cli ./src/test/workspace ./out/test/workspace
+  - yarn --cwd ./src/test/workspace
 
 script:
   - yarn test --silent
