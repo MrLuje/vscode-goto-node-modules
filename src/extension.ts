@@ -12,7 +12,6 @@ import * as child_process from "child_process";
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
   try {
-    window.onDidChangeTextEditorSelection(ev => {});
     let sub1 = vscode.commands.registerTextEditorCommand(
       "gotoNodeModules.navigateToPackage",
       async (textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit) => {
