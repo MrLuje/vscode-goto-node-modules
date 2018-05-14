@@ -11,7 +11,7 @@ import * as assert from 'assert';
 import * as vscode from 'vscode';
 import * as path from 'path';
 import {Uri, Range} from 'vscode';
-import sinon = require('sinon');
+import * as sinon from 'sinon';
 import * as child_process from 'child_process';
 
 // Defines a Mocha test suite to group tests of similar kind together
@@ -80,5 +80,49 @@ suite('Extension Tests', function() {
     });
 
     return pr;
+  });
+
+  // Defines a Mocha unit test
+  test('command gotoNodeModules.navigateToPackage show information msg on non-dependency line', async function() {
+    this.timeout('10s');
+
+    let packageJsonFile = Uri.file(
+      path.join(__dirname, 'workspace', 'package.json')
+    );
+    let doc = await vscode.workspace.openTextDocument(packageJsonFile);
+
+    await vscode.window.showTextDocument(doc, {
+      selection: new Range(1, 0, 1, 0)
+    });
+
+    let spyShowErrorMessage = sinon.spy(vscode.window, 'showErrorMessage');
+
+    await vscode.commands.executeCommand('gotoNodeModules.navigateToPackage');
+
+    assert.ok(spyShowErrorMessage.called);
+
+    spyShowErrorMessage.restore();
+  });
+
+  // Defines a Mocha unit test
+  test('command gotoNodeModules.navigateToPackage show information msg on other file than package.json', async function() {
+    this.timeout('10s');
+
+    let packageJsonFile = Uri.file(
+      path.join(__dirname, 'workspace', 'yarn.lock')
+    );
+    let doc = await vscode.workspace.openTextDocument(packageJsonFile);
+
+    await vscode.window.showTextDocument(doc, {
+      selection: new Range(1, 0, 1, 0)
+    });
+
+    let spyShowErrorMessage = sinon.spy(vscode.window, 'showErrorMessage');
+
+    await vscode.commands.executeCommand('gotoNodeModules.navigateToPackage');
+
+    assert.ok(spyShowErrorMessage.called);
+
+    spyShowErrorMessage.restore();
   });
 });
