@@ -17,6 +17,10 @@ export function activate(context: vscode.ExtensionContext) {
       async (textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit) => {
         let packageFolder = checkAndGetPackageFolderUnderCursor(textEditor);
         if (packageFolder) {
+          if (!fileManager.exists(packageFolder)) {
+            return failwith(ErrorCode.FOLDER_DOESNT_EXIST, packageFolder);
+          }
+
           let packageJsonInPackageFolder = path.join(
             packageFolder,
             'package.json'
@@ -40,6 +44,9 @@ export function activate(context: vscode.ExtensionContext) {
       async (textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit) => {
         let packageFolder = checkAndGetPackageFolderUnderCursor(textEditor);
         if (packageFolder) {
+          if (!fileManager.exists(packageFolder)) {
+            return failwith(ErrorCode.FOLDER_DOESNT_EXIST, packageFolder);
+          }
           child_process.exec(`start "" "${packageFolder}"`);
         }
       }
@@ -73,10 +80,11 @@ function checkAndGetPackageFolderUnderCursor(
 
 enum ErrorCode {
   NOT_PACKAGE_JSON,
-  NO_PACKAGE_UNDER_CURSOR
+  NO_PACKAGE_UNDER_CURSOR,
+  FOLDER_DOESNT_EXIST
 }
 
-function failwith(error: ErrorCode): void {
+function failwith(error: ErrorCode, ...args: any[]): void {
   let msg: string = 'Unknown error :(';
   switch (error) {
     case ErrorCode.NOT_PACKAGE_JSON:
@@ -86,8 +94,16 @@ function failwith(error: ErrorCode): void {
       msg =
         'This command should be invoked on a line with a dependency definition';
       break;
+    case ErrorCode.FOLDER_DOESNT_EXIST:
+      if (args) {
+        msg = `The folder ${
+          args[0]
+        } doesn't exists, did you install your dependencies ?`;
+      } else {
+        msg = `The requested package's folder doesn't exist, did you install your dependencies ?`;
+      }
   }
-  window.showErrorMessage(msg);
+  window.showErrorMessage(msg, 'Dismiss');
 }
 
 // this method is called when your extension is deactivated
