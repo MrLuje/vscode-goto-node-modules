@@ -13,9 +13,9 @@ Open package.json, click on a dependency :
 
 ![feature X](/images/demo.gif)
 
-## Extension Settings
+## Extension comamnds
 
-This extension contributes the following settings:
+This extension contributes the following commands:
 
 * `gotoNodeModules.navigateToPackage`: trigger the sidebar navigation
 * `gotoNodeModules.openPackageFolderInExplorer`: trigger the explorer navigation
