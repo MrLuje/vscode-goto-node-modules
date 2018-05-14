@@ -1,10 +1,10 @@
-import { TextDocument, TextEditor, Range, Position } from "vscode";
-import * as path from "path";
+import {TextDocument, TextEditor, Range, Position} from 'vscode';
+import * as path from 'path';
 
 class PackageJsonManager {
   private checkIfPackageJson(document: TextDocument) {
-    let { fileName } = document;
-    return path.basename(fileName).toLowerCase() === "package.json";
+    let {fileName} = document;
+    return path.basename(fileName).toLowerCase() === 'package.json';
   }
 
   isPackageJson(document: TextDocument): boolean {
@@ -20,7 +20,7 @@ class PackageJsonManager {
     );
 
     // if there is no dependencies defined before, do not bother checking further
-    return documentTillSelection.indexOf("ependencies") >= 0;
+    return documentTillSelection.indexOf('ependencies') >= 0;
   }
 
   extractPackageNameFromCurrentLine(textEditor: TextEditor): string | null {
@@ -35,7 +35,7 @@ class PackageJsonManager {
     let packageName = matches[1];
     let node_modules = path.join(
       path.dirname(textEditor.document.fileName),
-      "node_modules"
+      'node_modules'
     );
     let packageFolder = path.join(node_modules, packageName);
     return packageFolder;

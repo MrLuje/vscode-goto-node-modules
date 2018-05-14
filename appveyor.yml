@@ -12,8 +12,6 @@ install:
 build_script:
   - yarn
   - yarn vscode:prepublish
-  - npx copy-dir-cli ./src/test/workspace ./out/test
-  - yarn --cwd ./src/test/workspace
 
 test_script:
   - node --version

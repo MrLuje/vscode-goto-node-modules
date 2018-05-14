@@ -1,5 +1,5 @@
-import { TextDocument } from "vscode";
-import packageJsonManager from "./packageJsonManager";
+import {TextDocument} from 'vscode';
+import packageJsonManager from './packageJsonManager';
 
 class FileManager {
   public isPackageJson(document: TextDocument): boolean {
