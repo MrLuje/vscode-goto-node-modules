@@ -3,7 +3,7 @@
   "displayName": "vscode-goto-node_modules",
   "description":
     "Navigate a given package's folder in node_modules from package.json",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "MrLuje",
   "license": "MIT",
   "engines": {

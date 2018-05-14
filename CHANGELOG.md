@@ -3,5 +3,5 @@ All notable changes to the "vscode-goto-node-modules" extension will be document
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [1.0.0]
 - Initial release
