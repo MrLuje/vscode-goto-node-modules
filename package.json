@@ -1,88 +1,88 @@
 {
-  "name": "vscode-goto-node-modules",
-  "displayName": "vscode goto node_modules",
-  "description": "Navigate a given package's folder in node_modules from package.json",
-  "version": "1.0.0",
-  "publisher": "mrluje",
-  "license": "MIT",
-  "engines": {
-    "vscode": "^1.23.0"
-  },
-  "icon": "images/icon.png",
-  "repository": "https://github.com/MrLuje/vscode-goto-node-modules",
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onLanguage:json"
-  ],
-  "main": "./out/extension",
-  "contributes": {
-    "commands": [
-      {
-        "command": "gotoNodeModules.navigateToPackage",
-        "title": "Reveal package's folder in node_modules",
-        "category": "Go to node_modules"
-      },
-      {
-        "command": "gotoNodeModules.openPackageFolderInExplorer",
-        "title": "Open package's folder in system",
-        "category": "Go to node_modules"
-      }
+    "name": "vscode-goto-node-modules",
+    "displayName": "vscode goto node_modules",
+    "description": "Navigate a given package's folder in node_modules from package.json",
+    "version": "1.1.0",
+    "publisher": "mrluje",
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.23.0"
+    },
+    "icon": "images/icon.png",
+    "repository": "https://github.com/MrLuje/vscode-goto-node-modules",
+    "categories": [
+        "Other"
     ],
-    "keybindings": [
-      {
-        "command": "gotoNodeModules.navigateToPackage",
-        "key": "f12",
-        "mac": "f12",
-        "when": "resourceLangId == json && editorTextFocus"
-      },
-      {
-        "command": "gotoNodeModules.openPackageFolderInExplorer",
-        "key": "ctrl+f12",
-        "mac": "ctrl+f12",
-        "when": "resourceLangId == json && editorTextFocus"
-      }
+    "activationEvents": [
+        "onLanguage:json"
     ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "resourceLangId == json && editorTextFocus",
-          "command": "gotoNodeModules.navigateToPackage",
-          "alt": "gotoNodeModules.openPackageFolderInExplorer",
-          "group": "navigation@666"
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "gotoNodeModules.navigateToPackage",
+                "title": "Reveal package's folder in node_modules",
+                "category": "Go to node_modules"
+            },
+            {
+                "command": "gotoNodeModules.openPackageFolderInExplorer",
+                "title": "Open package's folder in system",
+                "category": "Go to node_modules"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "gotoNodeModules.navigateToPackage",
+                "key": "f12",
+                "mac": "f12",
+                "when": "resourceLangId == json && editorTextFocus"
+            },
+            {
+                "command": "gotoNodeModules.openPackageFolderInExplorer",
+                "key": "ctrl+f12",
+                "mac": "ctrl+f12",
+                "when": "resourceLangId == json && editorTextFocus"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "resourceLangId == json && editorTextFocus",
+                    "command": "gotoNodeModules.navigateToPackage",
+                    "alt": "gotoNodeModules.openPackageFolderInExplorer",
+                    "group": "navigation@666"
+                }
+            ]
         }
-      ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "pretest": "npx copy-dir-cli ./src/test/workspace ./out/test/workspace && yarn --cwd ./out/test/workspace",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test",
+        "publish-market": "vsce package --yarn -o ./build/vscode-goto-node-modules.vsix && vsce publish --packagePath ./build/vscode-goto-node-modules.vsix",
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.{ts}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.0.43",
+        "@types/sinon": "^4.3.3",
+        "husky": "^0.14.3",
+        "lint-staged": "^7.1.0",
+        "sinon": "^5.0.7",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
+    },
+    "dependencies": {
+        "prettier": "^1.12.1"
     }
-  },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "pretest": "npx copy-dir-cli ./src/test/workspace ./out/test/workspace && yarn --cwd ./out/test/workspace",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test",
-    "publish-market": "vsce package --yarn -o ./build/vscode-goto-node-modules.vsix && vsce publish --packagePath ./build/vscode-goto-node-modules.vsix",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{ts}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "@types/mocha": "^2.2.42",
-    "@types/node": "^7.0.43",
-    "@types/sinon": "^4.3.3",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.1.0",
-    "sinon": "^5.0.7",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.1",
-    "vscode": "^1.1.6"
-  },
-  "dependencies": {
-    "prettier": "^1.12.1"
-  }
 }
