@@ -51,6 +51,11 @@
                     "command": "gotoNodeModules.navigateToPackage",
                     "alt": "gotoNodeModules.openPackageFolderInExplorer",
                     "group": "navigation@666"
+                },
+                {
+                    "when": "resourceLangId == json && editorTextFocus",
+                    "command": "gotoNodeModules.openPackageFolderInExplorer",
+                    "group": "navigation@666"
                 }
             ]
         }
