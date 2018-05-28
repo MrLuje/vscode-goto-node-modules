@@ -16,6 +16,12 @@
     "activationEvents": [
         "onLanguage:json"
     ],
+    "keywords": [
+        "goto",
+        "navigate",
+        "node_modules",
+        "packages.json"
+    ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
@@ -67,7 +73,8 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "pretest": "npx copy-dir-cli ./src/test/workspace ./out/test/workspace && yarn --cwd ./out/test/workspace",
         "test": "npm run compile && node ./node_modules/vscode/bin/test",
-        "publish-market": "vsce package --yarn -o ./build/vscode-goto-node-modules.vsix && vsce publish --packagePath ./build/vscode-goto-node-modules.vsix",
+        "package": "vsce package --yarn -o ./build/vscode-goto-node-modules.vsix",
+        "publish-market": "yarn package && vsce publish --packagePath ./build/vscode-goto-node-modules.vsix",
         "precommit": "lint-staged"
     },
     "lint-staged": {
