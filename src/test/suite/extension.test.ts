@@ -10,20 +10,20 @@ import * as assert from 'assert';
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 import * as path from 'path';
-import {Uri, Range} from 'vscode';
+import { Uri, Range } from 'vscode';
 import * as sinon from 'sinon';
 import * as child_process from 'child_process';
 
 // Defines a Mocha test suite to group tests of similar kind together
-suite('Extension Tests', function() {
-  test('should load correctly', function() {
+suite('Extension Tests', function () {
+  test('should load correctly', function () {
     assert.ok(
       vscode.extensions.getExtension('mrluje.vscode-goto-node-modules')
     );
   });
 
   // Defines a Mocha unit test
-  test('command gotoNodeModules.navigateToPackage should open associated package', async function() {
+  test('command gotoNodeModules.navigateToPackage should open associated package', async function () {
     this.timeout('10s');
 
     let packageJsonFile = Uri.file(
@@ -41,7 +41,7 @@ suite('Extension Tests', function() {
           ev[0].document.fileName.indexOf('node_modules') >= 1;
 
         if (isCorrectFileOpened) {
-          ok();
+          ok(null);
         } else {
           nok(`Failed to open ${ev[0].document.fileName}`);
         }
@@ -54,7 +54,7 @@ suite('Extension Tests', function() {
   });
 
   // Defines a Mocha unit test
-  test('command gotoNodeModules.openPackageFolderInExplorer should trigger child_process.exe', async function() {
+  test('command gotoNodeModules.openPackageFolderInExplorer should trigger child_process.exe', async function () {
     this.timeout('10s');
 
     let packageJsonFile = Uri.file(
@@ -73,7 +73,7 @@ suite('Extension Tests', function() {
       );
 
       if (execStub.called) {
-        ok();
+        ok(null);
       } else {
         nok('child_process.exec not called');
       }
@@ -83,7 +83,7 @@ suite('Extension Tests', function() {
   });
 
   // Defines a Mocha unit test
-  test('command gotoNodeModules.navigateToPackage show information msg on non-dependency line', async function() {
+  test('command gotoNodeModules.navigateToPackage show information msg on non-dependency line', async function () {
     this.timeout('10s');
 
     let packageJsonFile = Uri.file(
@@ -105,7 +105,7 @@ suite('Extension Tests', function() {
   });
 
   // Defines a Mocha unit test
-  test('command gotoNodeModules.navigateToPackage show information msg on other file than package.json', async function() {
+  test('command gotoNodeModules.navigateToPackage show information msg on other file than package.json', async function () {
     this.timeout('10s');
 
     let packageJsonFile = Uri.file(
