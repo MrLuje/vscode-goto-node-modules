@@ -11,11 +11,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
     strategy:
       matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
         node-version: [18.x]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v3
@@ -30,6 +31,6 @@ jobs:
           cmd: install # will run `yarn install` command
       - run: yarn vscode:prepublish
       - name: Run headless test
-        uses: GabrielBB/xvfb-action@v1
+        uses: GabrielBB/xvfb-action@v1.6
         with:
           run: yarn test
