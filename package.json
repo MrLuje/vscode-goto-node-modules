@@ -90,6 +90,7 @@
         "@types/sinon": "^4.3.3",
         "@types/vscode": "^1.76.0",
         "@vscode/test-electron": "1.6.1",
+        "@vscode/vsce": "^2.18.0",
         "husky": "^0.14.3",
         "lint-staged": "^7.1.0",
         "mocha": "^10.2.0",
