@@ -29,4 +29,7 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
       - run: yarn vscode:prepublish
-      - run: yarn test
+      - name: Run headless test
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: yarn test
