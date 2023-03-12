@@ -4,10 +4,9 @@ build:
   verbosity: minimal
 
 install:
-  - ps: Install-Product node 6.5.0 x64
+  - ps: Install-Product node 18.0 x64
   - npm install -g yarn
-  - npm install -g npm@5.10.0
-  - npm install -g mocha 
+  - npm install -g mocha
 
 build_script:
   - yarn
