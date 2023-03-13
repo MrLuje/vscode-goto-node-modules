@@ -2,7 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import {window, Uri} from 'vscode';
+import { window, Uri } from 'vscode';
 import fileManager from './fileManager';
 import * as path from 'path';
 import packageJsonManager from './packageJsonManager';
@@ -53,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
     );
 
     context.subscriptions.push(sub1, sub2);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 function checkAndGetPackageFolderUnderCursor(
@@ -63,7 +63,7 @@ function checkAndGetPackageFolderUnderCursor(
     return failwith(ErrorCode.NOT_PACKAGE_JSON);
   }
 
-  if (!packageJsonManager.hasDependenciesDefined(textEditor)) {
+  if (!packageJsonManager.hasDependenciesDefined(textEditor) && !packageJsonManager.hasResolutionsDefined(textEditor)) {
     return failwith(ErrorCode.NO_PACKAGE_UNDER_CURSOR);
   }
 
@@ -96,9 +96,8 @@ function failwith(error: ErrorCode, ...args: any[]): void {
       break;
     case ErrorCode.FOLDER_DOESNT_EXIST:
       if (args) {
-        msg = `The folder ${
-          args[0]
-        } doesn't exists, did you install your dependencies ?`;
+        msg = `The folder ${args[0]
+          } doesn't exists, did you install your dependencies ?`;
       } else {
         msg = `The requested package's folder doesn't exist, did you install your dependencies ?`;
       }
@@ -107,4 +106,4 @@ function failwith(error: ErrorCode, ...args: any[]): void {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }

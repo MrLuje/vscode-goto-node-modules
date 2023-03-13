@@ -54,6 +54,37 @@ suite('Extension Tests', function () {
   });
 
   // Defines a Mocha unit test
+  test('command gotoNodeModules.navigateToPackage should open associated resolutions', async function () {
+    this.timeout('10s');
+
+    let packageJsonFile = Uri.file(
+      path.join(__dirname, 'workspace', 'package.json')
+    );
+    let doc = await vscode.workspace.openTextDocument(packageJsonFile);
+
+    await vscode.window.showTextDocument(doc, {
+      selection: new Range(9, 0, 9, 0)
+    });
+
+    var pr = new Promise(async (ok, nok) => {
+      vscode.window.onDidChangeVisibleTextEditors(ev => {
+        var isCorrectFileOpened =
+          ev[0].document.fileName.indexOf('node_modules') >= 1;
+
+        if (isCorrectFileOpened) {
+          ok(null);
+        } else {
+          nok(`Failed to open ${ev[0].document.fileName}`);
+        }
+      });
+
+      await vscode.commands.executeCommand('gotoNodeModules.navigateToPackage');
+    });
+
+    return pr;
+  });
+
+  // Defines a Mocha unit test
   test('command gotoNodeModules.openPackageFolderInExplorer should trigger child_process.exe', async function () {
     this.timeout('10s');
 

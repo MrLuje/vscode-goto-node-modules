@@ -1,10 +1,12 @@
 {
-    "name": "vscode-goto-node-modules",
-    "displayName": "vscode-goto-node_modules",
-    "description": "Navigate a given package's folder in node_modules from package.json",
-    "version": "1.0.0",
-    "devDependencies": {
-      "@types/node": "^7.0.43"
-    }
+  "name": "vscode-goto-node-modules",
+  "displayName": "vscode-goto-node_modules",
+  "description": "Navigate a given package's folder in node_modules from package.json",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@types/node": "^7.0.43"
+  },
+  "resolutions": {
+    "@types/node": "7.0.43"
   }
-  
+}

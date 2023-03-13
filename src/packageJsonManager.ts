@@ -1,9 +1,9 @@
-import {TextDocument, TextEditor, Range, Position} from 'vscode';
+import { TextDocument, TextEditor, Range, Position } from 'vscode';
 import * as path from 'path';
 
 class PackageJsonManager {
   private checkIfPackageJson(document: TextDocument) {
-    let {fileName} = document;
+    let { fileName } = document;
     return path.basename(fileName).toLowerCase() === 'package.json';
   }
 
@@ -21,6 +21,18 @@ class PackageJsonManager {
 
     // if there is no dependencies defined before, do not bother checking further
     return documentTillSelection.indexOf('ependencies') >= 0;
+  }
+
+  hasResolutionsDefined(textEditor: TextEditor): boolean {
+    let documentTillSelection = textEditor.document.getText(
+      new Range(
+        new Position(0, 0),
+        new Position(textEditor.selection.anchor.line, 0)
+      )
+    );
+
+    // if there is no resolutions defined before, do not bother checking further
+    return documentTillSelection.indexOf('resolutions') >= 0;
   }
 
   extractPackageNameFromCurrentLine(textEditor: TextEditor): string | null {
